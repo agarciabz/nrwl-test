@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { BackendService } from '../backend.service';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import { selectTickets } from '../reducers/ticket.selectors';
 
 @Component({
   selector: 'app-list',
@@ -7,8 +9,9 @@ import { BackendService } from '../backend.service';
   styleUrls: ['./list.component.css'],
 })
 export class ListComponent {
-  tickets = this.backend.tickets();
-  users = this.backend.users();
+  public tickets$ = this.store.select(selectTickets);
 
-  constructor(private backend: BackendService) {}
+  constructor(private store: Store) {
+    this.tickets$.subscribe(console.debug);
+  }
 }
