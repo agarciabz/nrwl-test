@@ -1,1 +1,13 @@
-<p>ticket works!</p>
+<h2>Ticket #{{ ticketId != null ? ticketId : '' }}</h2>
+
+<ng-container
+  *ngIf="{
+    ticket: ticket$ | async
+  } as ctx"
+>
+  <div>Assignee: {{ ctx.ticket.assigneeId }}</div>
+  <div>Completed: {{ ctx.ticket.completed }}</div>
+  <p>{{ ctx.ticket.description }}</p>
+</ng-container>
+
+<a href="/list">Go back</a>
